@@ -12,8 +12,8 @@ public class UserMessageParseEndNotifier implements IParserListener{
 	private static final long UNDEFINED_VALUE = -9999;
 	private Connection con = null;
 
-	private String userMessage = "Импорта правил завершён. Импортировано {{count}} записей.";
-	private String msgTitle = "Импорт завершён";
+	private String userMessage = "РРјРїРѕСЂС‚Р° РїСЂР°РІРёР» Р·Р°РІРµСЂС€С‘РЅ. РРјРїРѕСЂС‚РёСЂРѕРІР°РЅРѕ {{count}} Р·Р°РїРёСЃРµР№.";
+	private String msgTitle = "РРјРїРѕСЂС‚ Р·Р°РІРµСЂС€С‘РЅ";
 	
 	private int rowsInserted = 0;
 	
@@ -37,7 +37,7 @@ public class UserMessageParseEndNotifier implements IParserListener{
 
 	private String getUserMessage(){
 		if(this.userMessage == null){
-			this.userMessage = "<<импорт завершён>>";
+			this.userMessage = "<<РёРјРїРѕСЂС‚ Р·Р°РІРµСЂС€С‘РЅ>>";
 		}
 		return this.userMessage;
 
@@ -97,7 +97,7 @@ public class UserMessageParseEndNotifier implements IParserListener{
 	@Override
 	public void notifyInit() throws Exception {
 		if(con == null){
-			throw new NullPointerException("Необходимо передать идентификатор соединения (setConnection(...))");
+			throw new NullPointerException("РќРµРѕР±С…РѕРґРёРјРѕ РїРµСЂРµРґР°С‚СЊ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЃРѕРµРґРёРЅРµРЅРёСЏ (setConnection(...))");
 		}
 
 		
