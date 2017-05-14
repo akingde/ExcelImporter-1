@@ -133,7 +133,7 @@ public class DatabaseParserWriter  implements IParserWriter{
 		if(this.counter != null){
 			return this.counter;
 		} else {
-			return new SimpleCounter("DFOBJ");
+			return new SimpleCounter("ID");
 		}
 	}
 	

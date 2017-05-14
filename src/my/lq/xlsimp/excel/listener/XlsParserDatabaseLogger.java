@@ -15,12 +15,12 @@ public class XlsParserDatabaseLogger implements IParserListener{
 	private static final long UNDEFINED_VALUE = -9999;
 	private Connection con = null;
 
-	private String schemaName = "UNICORE";
-	private String logTableName = "T_DB_EXPORT_LOG";
-	private String sequenceName = "SOBJ";
-	private String idFieldName = "DFOBJ";
-	private String userFieldName = "T_OLAP_USER";
-	private String roleFieldName = "T_OLAP_ROLE";
+	private String schemaName = "MY_SCHEMA";
+	private String logTableName = "EXPORT_TABLE";
+	private String sequenceName = "SEQ";
+	private String idFieldName = "ID";
+	private String userFieldName = "USER";
+	private String roleFieldName = "TAG";
 	private String countFieldName = "DFCOUNT";
 	private String lastDateTimeFieldName = "DFLASTUPDATETIME";
 	private String startDateTimeFieldName = "DFSTARTDATETIME";
@@ -28,8 +28,8 @@ public class XlsParserDatabaseLogger implements IParserListener{
 	private String importTableFieldName = "DFIMPORTTABLENAME";
 	private String importTableName;
 			
-	private long _idUser = UNDEFINED_VALUE;
-	private long _idRole = UNDEFINED_VALUE;
+	private long _user = UNDEFINED_VALUE;
+	private long _role = UNDEFINED_VALUE;
 	
 	private long currentId = -1;
 	
@@ -57,13 +57,13 @@ public class XlsParserDatabaseLogger implements IParserListener{
 	}
 
 	public	XlsParserDatabaseLogger setUser(long value){
-		this._idUser = value;
+		this._user = value;
 		return this;
 	}
 
 
 	public	XlsParserDatabaseLogger setRole(long value){
-		this._idRole = value;
+		this._role = value;
 		return this;
 	}
 
@@ -118,24 +118,24 @@ public class XlsParserDatabaseLogger implements IParserListener{
 	}
 
 	private long getIdUser(){
-		if(this._idUser == UNDEFINED_VALUE ){
+		if(this._user == UNDEFINED_VALUE ){
 			String userExpression = "SELECT unicore.pack_context.get_context('PFUSER') FROM DUAL";
 			Record userRec= this.dslContext.fetchOne(userExpression);
 			String userRaw = String.valueOf(userRec.getValue(0));
-			this._idUser = userRaw!=null&&!"null".equalsIgnoreCase(userRaw)?Long.parseLong(userRaw):-1;
+			this._user = userRaw!=null&&!"null".equalsIgnoreCase(userRaw)?Long.parseLong(userRaw):-1;
 		}
-		return this._idUser;
+		return this._user;
 	}
 	
 	private long getIdRole(){
-		if(this._idRole == UNDEFINED_VALUE  ){
+		if(this._role == UNDEFINED_VALUE  ){
 			String roleExpression = "SELECT unicore.pack_context.get_context('PFROLE') FROM DUAL";
 			
 			Record roleRec = this.dslContext.fetchOne(roleExpression );
 			String roleRaw = String.valueOf(roleRec.getValue(0));
-			this._idRole = roleRaw!=null&&!"null".equalsIgnoreCase(roleRaw)?Long.parseLong(roleRaw):-1;
+			this._role = roleRaw!=null&&!"null".equalsIgnoreCase(roleRaw)?Long.parseLong(roleRaw):-1;
 		}
-		return this._idRole;
+		return this._role;
 		
 	}
 	
